@@ -18,5 +18,5 @@ CMD ["gunicorn", "--workers", "4", "--max-requests", "20000", "app:server"]
 # gcloud run deploy --image gcr.io/ProjectID/dash-youtube-example --platform managed  --project=ProjectID --allow-unauthenticated
 
 # ytsent-404915
-# gcloud builds submit --tag gcr.io/ytsent-404915/dash-youtube-example  --project=ytsent-404915
-# gcloud run deploy --image gcr.io/ytsent-404915/dash-youtube-example --platform managed  --project=ytsent-404915 --allow-unauthenticated
+# gcloud builds submit --tag gcr.io/sentimentanalytics/sentiment-analytics  --project=sentimentanalytics
+# gcloud run deploy sentiment-analytics --image gcr.io/ytsent-404915/dash-youtube-example --platform managed --region=asia-southeast1 --project=ytsent-404915 --allow-unauthenticated

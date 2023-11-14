@@ -3,7 +3,7 @@ import datetime
 import io
 
 import dash
-from dash import html, dcc, dash_table, callback, ctx
+from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 import plotly.express as px
@@ -171,7 +171,7 @@ def parse_contents(contents, filename, date):
         html.Hr(), 
     ])
 
-@callback(
+@app.callback(
     Output('output', 'children'),
     Input('button', 'n_clicks'),
     Input("url", "pathname"),
@@ -258,7 +258,7 @@ def custom_preds(n, data, x_data):
     if n is None:
         return dash.no_update
     else:
-        fig1 = px.bar(new_data:= custom_prediction(pd.DataFrame(data), x_data), x=new_data['Predictions'].unique().tolist(), y=new_data['Predictions'].value_counts().tolist()),
+        fig1 = px.bar(new_data:= custom_prediction(pd.DataFrame(data), x_data), x=new_data['Predictions'].unique().tolist(), y=new_data['Predictions'].value_counts().tolist())
         fig1.update_layout(title='Sentiment Counts', xaxis_title='Sentiment', yaxis_title='Count', titlefont=dict(family='Arial', size=20, color='black'), width=600, height=500)
         return dbc.Container([
             dbc.Row([
