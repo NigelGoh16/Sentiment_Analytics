@@ -227,10 +227,8 @@ def youtube_preds(n, data):
     else:
         fig1 = px.bar(new_data := custom_prediction(df := pd.DataFrame(data), x_data:="Comment"), x=new_data['Predictions'].unique().tolist(), y=new_data['Predictions'].value_counts().tolist())
         fig1.update_layout(title='Sentiment Counts', xaxis_title='Sentiment', yaxis_title='Count', titlefont=dict(family='Arial', size=20, color='black'), width=600, height=500)
-        fig2 = px.line(group_df := custom_prediction(df, x_data:="Comment", type=1).groupby(['Date', 'Video_Title'], as_index=False).agg(Average_Predictions=('Predictions', 'mean'), Number_Of_Comments=('Predictions', 'count')), x='Date', y='Average_Predictions', color='Video_Title')
+        fig2 = px.scatter(custom_prediction(df, x_data:="Comment", type=1).groupby(['Date', 'Video_Title']), x='Date', y='Average_Predictions', color='Video_Title', size='Number_Of_Comments')
         fig2.update_layout(title='Sentiment Over Time', yaxis_title='Average Sentiment Polarity', titlefont=dict(family='Arial', size=20, color='black'))
-        fig3 = px.scatter(group_df, x='Date', y='Average_Predictions', color='Video_Title', size='Number_Of_Comments')
-        fig3.update_layout(yaxis_title='Average Sentiment Polarity', titlefont=dict(family='Arial', size=20, color='black'))
         image_data, word_data = word_cloud(new_data, x_data), word_table(new_data, x_data)
         return dbc.Container([
             dbc.Row([
@@ -240,8 +238,6 @@ def youtube_preds(n, data):
                     dbc.CardBody(html.Img(src="data:image/png;base64," + image_data))], style={'border-color':'white', 'padding-top': 15}), md=6),]),
             dbc.Row([
                 dbc.Col(dcc.Graph(figure=fig2), md=12)]),
-            dbc.Row([
-                dbc.Col(dcc.Graph(figure=fig3), md=12)]),
             dbc.Row([
                 dbc.Col(table_style(new_data[[x_data, 'Predictions']]), md=6),
                 dbc.Col(table_style(word_data, tooltip=1), md=6)
