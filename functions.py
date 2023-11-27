@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 import re
+import nltk
+from nltk.corpus import stopwords
 
 # ML libraries
 import pickle
@@ -24,10 +26,8 @@ import requests
 
 
 # model = tf.saved_model.load('C:\\Users\\Lenovo\\Downloads\\Flask-Web-App-Tutorial\\website\\LSTM_GL_1L\LSTM_GL_1L')
-# Load model
-model = tf.keras.models.load_model('model_1.h5')
 
-# Load Tokenizer
+model = tf.keras.models.load_model('model_1.h5')
 with open('tokenizer.pkl', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
@@ -36,12 +36,8 @@ TAG_RE = re.compile(r'<[^>]+>')
 def remove_tags(text):
     return TAG_RE.sub('', text)
 
-# Open the text file in read mode
-with open('stopwords', 'r') as f:
-    # Read the entire contents of the file into a variable
-    stopwords = f.read()
-# Load stopwords
-stopwords_list = stopwords.splitlines()
+nltk.download('stopwords')
+stopwords_list = stopwords.words('english')
 
 def preprocess_text(sen):
     sen = sen.lower()

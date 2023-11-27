@@ -28,10 +28,10 @@ html, body{
 
 .div-home-dir{
     background-color: #212529;
-    opacity: 0.5;
+    opacity: 0.7;
     color: #e9ecef;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    padding-bottom: 5rem;
+    padding-top: 2rem;
 }
 
 .bebas{
@@ -44,8 +44,4 @@ html, body{
 
 .base-light{
     color: #e9ecef;
-}
-
-.pic{
-    padding-top: 12rem;
 }

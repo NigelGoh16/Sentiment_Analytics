@@ -10,7 +10,6 @@ COPY . .
 # Install production dependencies.
 RUN pip install -r requirements.txt
 
-
 EXPOSE 8080
 
 CMD ["gunicorn", "--workers", "4", "--max-requests", "20000", "app:server"]
@@ -19,8 +18,5 @@ CMD ["gunicorn", "--workers", "4", "--max-requests", "20000", "app:server"]
 # gcloud run deploy --image gcr.io/ProjectID/dash-youtube-example --platform managed  --project=ProjectID --allow-unauthenticated
 
 # ytsent-404915
-# gcloud builds submit --tag gcr.io/ytsentanalytics/sentiment-analytics  --project=ytsentanalytics
-# gcloud run deploy sentiment-analytics --image gcr.io/ytsentanalytics/sentiment-analytics --platform managed --region=asia-southeast1 --project=ytsentanalytics --allow-unauthenticated
-
-# gcloud builds submit --tag gcr.io/ytsentanalytics/sentiment-test  --project=ytsentanalytics
-# gcloud run deploy sentiment-test --image gcr.io/ytsentanalytics/sentiment-test --platform managed --region=asia-southeast1 --project=ytsentanalytics --allow-unauthenticated
+# gcloud builds submit --tag gcr.io/sentimentanalytics/sentiment-analytics  --project=sentimentanalytics
+# gcloud run deploy sentiment-analytics --image gcr.io/sentimentanalytics/sentiment-analytics --platform managed --region=asia-southeast1 --project=sentimentanalytics --allow-unauthenticated

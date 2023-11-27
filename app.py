@@ -111,16 +111,14 @@ def general_page(title, desc, placeholder="", button_text="", type=0):
         page = [        
                 html.Div(children=[
                     html.Div(children=[
-                        html.Img(src=app.get_asset_url('light bulb.jpg'), style={'width': '30%', 'padding-left': '3rem'}),
-                        html.Img(src=app.get_asset_url('QUESTION.jpeg'), style={'width': '30%'}),
-                        html.Img(src=app.get_asset_url('Magnifying Glass.jpg'), style={'width': '30%'})
-                    ], className='d-flex justify-content-between pic'),
+                        html.Img(src=app.get_asset_url('Word gif.gif'))
+                    ], style={'display': 'flex', 'flex-direction': 'column', 'width': '100%'}),
                     html.Div(children=[
                         html.H1('Uncover the Emotional Pulse of the Web with', className='text-center base-light bebas'),
                         html.H1('Sentiment Analytics', className='text-center base-light bebas'),
                         html.P("Delve into the world of sentiment analysis and uncover the hidden emotions that drive online conversations. Our powerful web app empowers you to effortlessly analyze text, process custom files, and even extract insights from YouTube comment data.", className="lead text-center base-light"),
                         html.Br()
-                    ], style={'position': 'absolute','top': '5px', 'padding-top': '10px', 'width': '83%', 'z-index': 1, 'background-color': '#212529', 'opacity': 0.6}),
+                    ], style={'position': 'absolute','top': '5px', 'padding-top': '10px', 'width': '83%', 'z-index': 1, 'background-color': '#212529', 'opacity': 0.9}),
                     html.Div(children=[
                         html.Div(children=[
                             html.Div(children=[
@@ -142,7 +140,7 @@ def general_page(title, desc, placeholder="", button_text="", type=0):
                                     html.A(children=[html.Button(id='yt-dir', children='Try Now!', className='btn btn-outline-light')], href="/youtube-analysis")])
                             ], className='col-md-4 border div-home-dir'),
                         ], className='d-flex justify-content-between')
-                    ], style={'position': 'absolute', 'width': '83%', 'z-index': 1, 'bottom': '5px'})
+                    ], style={'position': 'absolute', 'width': '83%', 'z-index': 1, 'bottom': '10px'})
                 ])
                 ]
     return page
@@ -280,21 +278,7 @@ def youtube_preds(n, data):
                 dbc.Col(table_style(new_data[[x_data, 'Predictions']]), md=6),
                 dbc.Col(table_style(word_data, tooltip=1), md=6)]),
             dbc.Row([
-                html.Div(children=[html.Div([html.A(children=[html.Button(id='yt-back', children='Reset', className='btn btn-outline-danger')], href="/youtube-analysis")], className='px-4'),
-                                   html.Div([html.Button(id='download-button', children='Download', className='btn btn-primary')], className='px-4'),
-                                   dcc.Download(id = "download-csv")], className='d-flex justify-content-center pt-2 pb-4')]),
-            dcc.Store(id='download-data', data=data)])
-    
-@app.callback(
-    Output("download-csv", "data"),
-    [Input('download-button','n_clicks'),
-    State('download-data','data')])
-def youtube_preds(n, data):
-    if n is None:
-        return dash.no_update
-    else:
-        content = pd.DataFrame(data).to_csv(index=False)
-        return dict(content=content, filename="sentimentanalysis.csv")
+                html.Div(children=[html.A(children=[html.Button(id='yt-back', children='Reset', className='btn btn-outline-danger')], href="/youtube-analysis")], className='d-flex justify-content-center pt-2 pb-4')])])
 
 @app.callback(
     Output('page-content','children',allow_duplicate=True),
@@ -318,10 +302,7 @@ def custom_preds(n, data, x_data):
                 dbc.Col(table_style(new_data[[x_data, 'Predictions']]), md=6),
                 dbc.Col(table_style(word_table(new_data, x_data), tooltip=1), md=6)]),
             dbc.Row([
-                html.Div(children=[html.Div([html.A(children=[html.Button(id='cust-back', children='Reset', className='btn btn-outline-danger')], href="/custom-analysis")], className='px-4'),
-                                   html.Div([html.Button(id='download-button', children='Download', className='btn btn-primary')], className='px-4'),
-                                   dcc.Download(id = "download-csv")], className='d-flex justify-content-center pt-2 pb-4')]),
-            dcc.Store(id='download-data', data=data)])
+                html.A(children=[html.Button(id='custom-back', children='Reset', className='btn btn-primary')], href="/custom-analysis"), html.Br()], className='d-flex justify-content-center pb-4')])
 
 if __name__=='__main__':
     app.run_server(debug=False, host="0.0.0.0", port=8080)
