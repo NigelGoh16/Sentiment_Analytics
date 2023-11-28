@@ -11,4 +11,4 @@ Bidirectional LSTM represents the model that was implemented in this project.
 
 ## Usage
 A link is provided below to use the developed application which is hosted on Google Cloud:
-https://sentiment-analytics-s55vqg54da-as.a.run.app/
+https://sentiment-analytics-vjfkd634aq-as.a.run.app/
